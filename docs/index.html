@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpatialAxiom &middot; Open Spatial Intelligence (9B &amp; 35B-A3B)</title>
+  <meta name="description" content="SpatialAxiom: open spatial-intelligence vision-language models (SpatialAxiom-9B and SpatialAxiom-35B-A3B) leading across 8 spatial reasoning benchmarks." />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#101828',
+            panel: '#ffffff',
+            accent: '#8B72D6',
+            accent2: '#B49CE8',
+            spatial: '#8B72D6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <!-- Generated leaderboard data (window.LEADERBOARD). Regenerate via _regen_leaderboard.py (data from cards/TQ-Spatial-9B.md) -->
+  <script src="leaderboard.js?v=20260721-spatialaxiom"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 104px; }
+    body {
+      background:
+        radial-gradient(780px 420px at 78% -8%, rgba(139,114,214,0.14), transparent 62%),
+        radial-gradient(620px 360px at 6% 10%, rgba(180,156,232,0.12), transparent 58%),
+        linear-gradient(180deg, #ffffff 0%, #f8f6fc 48%, #ffffff 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(16,24,40,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,24,40,0.045) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.48), transparent 70%);
+    }
+    .glass {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(16,24,40,0.10);
+      box-shadow: 0 24px 70px rgba(16,24,40,0.08);
+      backdrop-filter: blur(14px);
+    }
+    .nav-shell { background: rgba(255,255,255,0.86); border: 1px solid rgba(16,24,40,0.10); box-shadow: 0 18px 48px rgba(16,24,40,0.08); backdrop-filter: blur(18px); }
+    .grad-text { background: linear-gradient(90deg,#101828 0%,#6F55C4 48%,#B49CE8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 0.12em; padding-right: 0.08em; margin-right: -0.08em; }
+    .chip { border:1px solid rgba(16,24,40,0.12); background: rgba(255,255,255,0.72); color: #344054; }
+    .section-kicker { color: #8B72D6; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+    .section-frame { position: relative; }
+    .section-frame::before {
+      content: "";
+      position: absolute;
+      left: max(1.25rem, calc((100vw - 72rem) / 2));
+      top: 0;
+      width: 56px;
+      height: 1px;
+      background: linear-gradient(90deg, #8B72D6, transparent);
+    }
+    .hero-stage {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-stage::before {
+      content: "";
+      position: absolute;
+      inset: 10% -16% -22% 8%;
+      background:
+        linear-gradient(115deg, transparent 44%, rgba(139,114,214,0.18) 45%, transparent 46%),
+        repeating-linear-gradient(90deg, rgba(16,24,40,0.12) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(0deg, rgba(16,24,40,0.10) 0 1px, transparent 1px 64px);
+      transform: perspective(700px) rotateX(62deg) rotateZ(-19deg);
+      transform-origin: center;
+      opacity: 0.72;
+      z-index: -1;
+    }
+    .spatial-card { background: rgba(255,255,255,0.90); border: 1px solid rgba(16,24,40,0.10); box-shadow: 0 18px 48px rgba(16,24,40,0.07); }
+    .spatial-dot { box-shadow: 0 0 28px rgba(139,114,214,0.45); }
+    .soft-divider { border-color: rgba(16,24,40,0.08); }
+    #rank-table th,
+    #rank-table td { transition: background-color 0.12s ease, box-shadow 0.12s ease; }
+    #rank-table .rank-row-ours > td { background-color: #f1edfb; }
+    #rank-table .rank-col-hover,
+    #rank-table .rank-row-hover { box-shadow: inset 0 0 0 9999px rgba(242,244,247,0.58); }
+    #rank-table .rank-row-ours > .rank-col-hover,
+    #rank-table .rank-row-ours > .rank-row-hover { box-shadow: inset 0 0 0 9999px rgba(100,116,139,0.16); }
+    .text-white { color: #101828 !important; }
+    .text-slate-200, .text-slate-300 { color: #344054 !important; }
+    .text-slate-400 { color: #667085 !important; }
+    .text-slate-500 { color: #98a2b3 !important; }
+    .text-slate-600 { color: #98a2b3 !important; }
+    .bg-white { background-color: #101828 !important; }
+    .bg-white.text-ink, .bg-white .text-ink { color: #ffffff !important; }
+    .bg-white\/\[0\.045\] { background-color: rgba(255,255,255,0.78) !important; }
+    .bg-ink\/40 { background-color: rgba(255,255,255,0.72) !important; }
+    .border-white\/10, .border-white\/\[0\.10\] { border-color: rgba(16,24,40,0.10) !important; }
+    .bg-accent.text-white { color: #ffffff !important; }
+    a.bg-white, button.bg-white { color: #ffffff !important; }
+    ::-webkit-scrollbar { height:8px; width:8px; }
+    ::-webkit-scrollbar-thumb { background: rgba(16,24,40,0.18); border-radius: 8px; }
+  </style>
+</head>
+<body class="text-slate-700 font-sans antialiased overflow-x-hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-hf" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/>
+    </symbol>
+    <symbol id="icon-ms" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M2.667 5.333V8H0v5.333h2.667v-2.666H.5V8.5h2.166v2.166h2.666V8H8V5.333Zm0 8v5.334H8V16H5.333v-2.667Zm13.333-8V8h2.667v2.667h2.666V8.5H23.5v2.166h-2.166v2.666H24V8h-2.667V5.333Zm5.333 8h-2.666V16H16v2.667h5.333zM8 10.667v2.666h2.667v-2.666zm2.667 2.666V16h2.666v-2.667zm2.666 0H16v-2.666h-2.667z"/>
+    </symbol>
+  </svg>
+
+  <!-- Nav -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mt-4 nav-shell rounded-full px-4 py-3 relative flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2 font-semibold tracking-tight text-white">
+        <img src="assets/qwen.png" alt="Qwen" class="h-6 w-6 object-contain" />
+        SpatialAxiom
+      </a>
+      <nav class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-white/[0.045] p-1 text-sm text-slate-300">
+        <a href="#overview" class="rounded-full px-4 py-1.5 hover:bg-ink/[0.06] hover:text-ink" data-i18n="nav.overview">Overview</a>
+        <a href="#results" class="rounded-full px-4 py-1.5 hover:bg-ink/[0.06] hover:text-ink" data-i18n="nav.results">Results</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="lang-toggle" class="chip text-sm rounded-full px-3 py-1.5 text-slate-200 hover:bg-ink/[0.06]">中文</button>
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="relative px-5 pb-24 pt-36 md:pt-40">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="section-kicker mb-5" data-i18n="hero.kicker">Open Spatial Models</p>
+      <h1 class="text-5xl font-black tracking-[-0.055em] text-white md:text-7xl lg:text-8xl leading-[1.05]">
+        Spatial<span class="grad-text">Axiom</span>
+      </h1>
+      <p class="mt-7 text-lg md:text-xl text-slate-300 mx-auto max-w-2xl leading-relaxed" data-i18n-html="hero.desc">
+        An Open Spatial Intelligence Model for General Spatial Reasoning
+      </p>
+
+      <!-- Released model cards -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4 text-left">
+        <div class="spatial-card rounded-3xl p-6 relative overflow-hidden" style="background: radial-gradient(circle at 100% 0%, rgba(139,114,214,0.18), transparent 42%), rgba(255,255,255,0.90);">
+          <span class="absolute top-5 right-5 text-[10px] rounded px-2 py-0.5 bg-accent text-white font-semibold" data-i18n="model.released">RELEASED</span>
+          <h3 class="text-xl font-bold text-white">SpatialAxiom-9B</h3>
+          <p class="mt-1 text-xs text-slate-400" data-i18n="model9.base">Built on Qwen3.5-9B &middot; compact dense model</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a href="#MS_9B_REPO_URL" data-link="ms9" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 bg-accent text-white text-sm font-medium hover:opacity-90">
+              <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-ms"/></svg>
+              ModelScope
+            </a>
+            <a href="https://huggingface.co/yokinglou/SpatialAxiom-9B" data-link="hf9" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
+              <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-hf"/></svg>
+              Hugging Face
+            </a>
+          </div>
+        </div>
+        <div class="spatial-card rounded-3xl p-6 relative overflow-hidden" style="background: radial-gradient(circle at 100% 0%, rgba(180,156,232,0.22), transparent 42%), rgba(255,255,255,0.90);">
+          <span class="absolute top-5 right-5 text-[10px] rounded px-2 py-0.5 bg-accent text-white font-semibold" data-i18n="model.released">RELEASED</span>
+          <h3 class="text-xl font-bold text-white">SpatialAxiom-35B-A3B</h3>
+          <p class="mt-1 text-xs text-slate-400" data-i18n="model35.base">Built on Qwen3.5-35B-A3B &middot; MoE with 3B active params</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a href="#MS_35B_REPO_URL" data-link="ms35" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 bg-accent text-white text-sm font-medium hover:opacity-90">
+              <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-ms"/></svg>
+              ModelScope
+            </a>
+            <a href="https://huggingface.co/yokinglou/SpatialAxiom-35B-A3B" data-link="hf35" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
+              <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-hf"/></svg>
+              Hugging Face
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="section-frame px-5 py-20 border-t soft-divider">
+    <div class="mx-auto max-w-6xl">
+      <p class="section-kicker mb-3" data-i18n="kicker.overview">Overview</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white" data-i18n="overview.title">Overview</h2>
+      <p class="mt-4 text-slate-300" data-i18n-html="overview.desc">
+        <span class="text-white">SpatialAxiom</span> is a spatial intelligence model built on the
+        <span class="text-white">Qwen3.5 family</span> with large-scale spatial supervision spanning indoor scenes,
+        egocentric views, and multi-camera settings, delivering strong general spatial reasoning without altering the base architecture.
+      </p>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-2 w-2 shrink-0 rounded-full bg-spatial spatial-dot"></span>
+            <h4 class="font-semibold text-white" data-i18n="hl.c1t">Leading Spatial Reasoning</h4>
+          </div>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed" data-i18n="hl.c1d">On average, our models surpass proprietary models and larger open-source alternatives, with leading results on VSI-Bench, MMSI-Bench, MindCube, ViewSpatial, and EmbSpatial.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-2 w-2 shrink-0 rounded-full bg-spatial spatial-dot"></span>
+            <h4 class="font-semibold text-white" data-i18n="hl.c2t">Spatial Data-Centric Training Recipe</h4>
+          </div>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed" data-i18n="hl.c2d">A systematic taxonomy of spatial tasks, balanced task distribution, and data synthesis to raise data quality. SpatialAxiom is trained purely with full-parameter SFT and serves as a clean starting point for downstream fine-tuning or RL.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-2 w-2 shrink-0 rounded-full bg-spatial spatial-dot"></span>
+            <h4 class="font-semibold text-white" data-i18n="hl.c3t">Qwen3.5 VLM Backbone</h4>
+          </div>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed" data-i18n="hl.c3d">Inherits the Qwen3.5 vision-language model architecture, preserving a general-purpose multimodal design without task-specific architectural modifications.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-2 w-2 shrink-0 rounded-full bg-spatial spatial-dot"></span>
+            <h4 class="font-semibold text-white" data-i18n="hl.c4t">Open-Weight Release</h4>
+          </div>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed" data-i18n="hl.c4d">SpatialAxiom-9B and SpatialAxiom-35B-A3B are publicly released on Hugging Face and ModelScope, compatible with transformers and vLLM out of the box.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="section-frame px-5 py-20 border-t soft-divider">
+    <div class="mx-auto max-w-6xl">
+      <p class="section-kicker mb-3" data-i18n="kicker.evaluation">Evaluation</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white" data-i18n="results.title">Evaluation Results</h2>
+      <p class="mt-4 max-w-3xl text-slate-300" data-i18n-html="results.desc">
+        Measured on <span class="text-white">8 spatial reasoning benchmarks</span>.
+      </p>
+
+      <!-- Average ranking -->
+      <div class="mt-10 glass rounded-2xl p-6">
+        <div class="grid lg:grid-cols-[1.55fr,1fr] gap-6 items-start">
+          <div>
+            <div class="text-sm font-semibold text-white" data-i18n="chart.avg.title">Average Score</div>
+            <div class="text-[11px] text-slate-400" data-i18n="chart.avg.sub">Over 8 spatial reasoning benchmarks</div>
+            <div id="chart-avg" class="w-full" style="height:460px;"></div>
+          </div>
+          <div class="lg:border-l lg:pl-6 border-white/10">
+            <div class="text-sm font-semibold text-white" data-i18n="chart.radar.title">Capability Profile</div>
+            <div class="text-[11px] text-slate-400" data-i18n="chart.radar.sub">Per-benchmark scores across models</div>
+            <div id="chart-radar" class="w-full" style="height:420px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Per-benchmark small multiples (horizontal bars, 4 per row) -->
+      <div class="mt-8 glass rounded-2xl p-6">
+        <div class="flex items-baseline justify-between flex-wrap gap-2">
+          <h3 class="text-white font-semibold" data-i18n="chart.bench.title">Per-benchmark comparison</h3>
+          <span class="text-xs text-slate-400" data-i18n="chart.bench.sub">Score on each of the 8 spatial benchmarks</span>
+        </div>
+        <div id="bench-grid" class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+
+      <!-- Table -->
+      <div class="mt-8 glass rounded-2xl p-6">
+        <div class="flex items-baseline justify-between flex-wrap gap-2">
+          <h3 class="text-white font-semibold" data-i18n="table.title">Detailed ranking table</h3>
+          <span class="text-xs text-slate-400" data-i18n="table.hint">Click a column header to sort</span>
+        </div>
+        <div class="mt-4 overflow-x-auto">
+          <table id="rank-table" class="w-full text-sm border-collapse min-w-[820px]">
+            <thead id="rank-head"></thead>
+            <tbody id="rank-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="px-5 py-14 border-t soft-divider">
+    <div class="mx-auto max-w-6xl">
+      <div class="glass rounded-2xl p-6">
+        <div class="flex items-center justify-between gap-2">
+          <div class="text-white font-semibold" data-i18n="footer.cite">Citation</div>
+          <button id="copy-cite" class="chip text-xs rounded-full px-3 py-1.5 text-slate-200 hover:bg-ink/[0.06]" data-i18n="footer.copy">Copy</button>
+        </div>
+        <pre class="mt-3 text-xs text-slate-400 whitespace-pre-wrap break-words"><code id="bibtex-code">@misc{spatialaxiom,
+    title  = {SpatialAxiom: An Open Spatial Intelligence Model for General Spatial Reasoning},<span style="display:block;padding-left:13ch;text-indent:-13ch;">    author = {Lou, Yujing and Chen, Pingyi and Cao, Shen and Gu, Jiaqi and Guo, Jinhui and Tong, Jintao and Hao, Yunzhuo and Liu, Yao and Fan, Lubin and Wu, Yue and Ye, Jieping},</span>    month  = {July},
+    year   = {2026},
+    url    = {https://d2i-ai.github.io/SpatialAxiom}
+}</code></pre>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Config: public links (edit before publishing) ----
+    const LINKS = {
+      hf: 'https://huggingface.co/yokinglou/SpatialAxiom-9B',
+      hf9: 'https://huggingface.co/yokinglou/SpatialAxiom-9B',
+      hf35: 'https://huggingface.co/yokinglou/SpatialAxiom-35B-A3B',
+      ms9: '<MS_9B_REPO_URL>',
+      ms35: '<MS_35B_REPO_URL>',
+    };
+    function applyLinks() {
+      document.querySelectorAll('[data-link]').forEach(a => {
+        const url = LINKS[a.dataset.link];
+        if (url && !url.startsWith('<')) a.setAttribute('href', url);
+      });
+    }
+
+    // ---- i18n ----
+    const I18N = {
+      en: {
+        'nav.overview': 'Overview', 'nav.results': 'Results',
+        'hero.kicker': 'Open Spatial Models',
+        'hero.desc': 'An Open Spatial Intelligence Model for General Spatial Reasoning',
+        'model.released': 'RELEASED',
+        'model9.base': 'Built on Qwen3.5-9B · compact dense model',
+        'model35.base': 'Built on Qwen3.5-35B-A3B · MoE with 3B active params',
+        'kicker.overview': 'Overview', 'kicker.evaluation': 'Evaluation',
+        'overview.title': 'Overview',
+        'overview.desc': '<span class="text-white">SpatialAxiom</span> is a spatial intelligence model built on the <span class="text-white">Qwen3.5 family</span> with large-scale spatial supervision spanning indoor scenes, egocentric views, and multi-camera settings, delivering strong general spatial reasoning without altering the base architecture.',
+        'hl.c1t': 'Leading Spatial Reasoning',
+        'hl.c1d': 'On average, our models surpass proprietary models and larger open-source alternatives, with leading results on VSI-Bench, MMSI-Bench, MindCube, ViewSpatial, and EmbSpatial.',
+        'hl.c2t': 'Spatial Data-Centric Training Recipe',
+        'hl.c2d': 'A systematic taxonomy of spatial tasks, balanced task distribution, and data synthesis to raise data quality. SpatialAxiom is trained purely with full-parameter SFT and serves as a clean starting point for downstream fine-tuning or RL.',
+        'hl.c3t': 'Qwen3.5 VLM Backbone',
+        'hl.c3d': 'Inherits the Qwen3.5 vision-language model architecture, preserving a general-purpose multimodal design without task-specific architectural modifications.',
+        'hl.c4t': 'Open-Weight Release',
+        'hl.c4d': 'SpatialAxiom-9B and SpatialAxiom-35B-A3B are publicly released on Hugging Face and ModelScope, compatible with transformers and vLLM out of the box.',
+        'results.title': 'Evaluation Results',
+        'results.desc': 'Measured on <span class="text-white">8 spatial reasoning benchmarks</span>.',
+        'chart.avg.title': 'Average Score', 'chart.avg.sub': 'Over 8 spatial reasoning benchmarks',
+        'chart.radar.title': 'Capability Profile', 'chart.radar.sub': 'Per-benchmark scores across models',
+        'chart.bench.title': 'Per-benchmark comparison', 'chart.bench.sub': 'Score on each of the 8 spatial benchmarks',
+        'table.title': 'Detailed ranking table', 'table.hint': 'Click a column header to sort',
+        'table.col_model': 'Model', 'table.col_avg': 'Avg',
+        'badge.released': 'RELEASED', 'badge.ours': 'OURS',
+        'footer.cite': 'Citation', 'footer.copy': 'Copy', 'footer.copied': 'Copied!',
+      },
+      zh: {
+        'nav.overview': '概览', 'nav.results': '评测结果',
+        'hero.kicker': '开源空间智能模型',
+        'hero.desc': '面向通用空间推理的开源空间智能模型',
+        'model.released': '已开源',
+        'model9.base': '基于 Qwen3.5-9B · 紧凑稠密模型',
+        'model35.base': '基于 Qwen3.5-35B-A3B · MoE 架构，激活参数 3B',
+        'kicker.overview': '概览', 'kicker.evaluation': '评测',
+        'overview.title': '概览',
+        'overview.desc': '<span class="text-white">SpatialAxiom</span> 是基于 <span class="text-white">Qwen3.5 家族</span>的空间智能模型，使用覆盖室内场景、第一人称视角与多相机设置的大规模空间监督数据训练，在不改动基座架构的前提下获得强大的通用空间推理能力。',
+        'hl.c1t': '领先的空间推理能力',
+        'hl.c1d': '平均表现超越闭源模型与更大规模的开源模型，在 VSI-Bench、MMSI-Bench、MindCube、ViewSpatial、EmbSpatial 上取得领先成绩。',
+        'hl.c2t': '以空间数据为核心的训练方案',
+        'hl.c2d': '系统化的空间任务分类、均衡的任务配比，以及通过数据合成提升数据质量。SpatialAxiom 仅通过全参数 SFT 训练而成，可作为下游继续微调或强化学习的干净起点。',
+        'hl.c3t': 'Qwen3.5 VLM 骨干',
+        'hl.c3d': '沿用 Qwen3.5 视觉语言模型架构，保持通用多模态设计，无任务特化的架构改动。',
+        'hl.c4t': '开源权重发布',
+        'hl.c4d': 'SpatialAxiom-9B 与 SpatialAxiom-35B-A3B 已在 Hugging Face 与 ModelScope 公开发布，开箱即用兼容 transformers 与 vLLM。',
+        'results.title': '评测结果',
+        'results.desc': '在 <span class="text-white">8 个空间推理评测集</span>上评测。',
+        'chart.avg.title': '平均分', 'chart.avg.sub': '8 个空间推理评测集的平均成绩',
+        'chart.radar.title': '能力画像', 'chart.radar.sub': '各模型在 8 个基准上的得分',
+        'chart.bench.title': '细分基准对比', 'chart.bench.sub': '在 8 个空间基准上的逐项得分',
+        'table.title': '细分排名表', 'table.hint': '点击列头可排序',
+        'table.col_model': '模型', 'table.col_avg': '均分',
+        'badge.released': '已开源', 'badge.ours': 'Ours',
+        'footer.cite': '引用', 'footer.copy': '复制', 'footer.copied': '已复制！',
+      },
+    };
+    let LANG = localStorage.getItem('tq_lang') || 'en';
+    const t = k => (I18N[LANG] && I18N[LANG][k] != null) ? I18N[LANG][k] : (I18N.en[k] != null ? I18N.en[k] : k);
+    function applyI18n() {
+      document.documentElement.lang = (LANG === 'zh') ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (I18N.en[k] != null || (I18N[LANG] && I18N[LANG][k] != null)) el.textContent = t(k);
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      });
+      const lt = document.getElementById('lang-toggle');
+      if (lt) lt.textContent = (LANG === 'zh') ? 'EN' : '中文';
+    }
+
+    // ---- Theme palette (matches build_benchmark_figure.py model-card style) ----
+    const C = {
+      grid: '#E5E7EB',
+      spine: '#D1D5DB',
+      text: '#374151',
+      muted: '#6B7280',
+      track: '#F0F2F6',
+    };
+    // Ours: soft violet; all competitors: one neutral gray (single point of emphasis).
+    const BAR = {
+      ours: { light: '#BCADE7', dark: '#836BC9' },
+      other: { light: '#E1E5EA', dark: '#BFC5CD' },
+    };
+    const barPalette = m => m.is_ours ? BAR.ours : BAR.other;
+    // Light-to-full gradient along the bar, rounded outer end (as in the card figure).
+    const hGradient = m => new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+      { offset: 0, color: barPalette(m).light }, { offset: 1, color: barPalette(m).dark }]);
+    const vGradient = m => new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color: barPalette(m).dark }, { offset: 1, color: barPalette(m).light }]);
+
+    // Model logos shown at the bar ends (same mapping as the card figure).
+    const MODEL_ICONS = {
+      'SpatialAxiom-35B-A3B': 'assets/qwen.png',
+      'SpatialAxiom-9B': 'assets/qwen.png',
+      'Gemini-3.5-Flash': 'assets/gemini.webp',
+      'Qwen3.7-Plus': 'assets/qwen.png',
+      'Gemini-3.1-Pro': 'assets/gemini.webp',
+      'SenseNova-SI-1.5-InternVL3-8B': 'assets/sensenova.png',
+      'Kimi-K2.6': 'assets/Kimi.png',
+      'GPT-5.5': 'assets/gpt.png',
+    };
+    // Icons are pre-composited onto a white rounded-square badge (uniform size),
+    // mirroring the badges in the model-card figure.
+    let BADGES = {}; // icon src -> dataURL
+    function buildIconBadges(size = 96) {
+      const srcs = [...new Set(Object.values(MODEL_ICONS))];
+      return Promise.all(srcs.map(src => new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement('canvas');
+          c.width = c.height = size;
+          const ctx = c.getContext('2d');
+          const r = size * 0.24;
+          ctx.beginPath();
+          ctx.moveTo(r, 0);
+          ctx.arcTo(size, 0, size, size, r);
+          ctx.arcTo(size, size, 0, size, r);
+          ctx.arcTo(0, size, 0, 0, r);
+          ctx.arcTo(0, 0, size, 0, r);
+          ctx.closePath();
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          const pad = size * 0.15;
+          ctx.drawImage(img, pad, pad, size - 2 * pad, size - 2 * pad);
+          BADGES[src] = c.toDataURL('image/png');
+          resolve();
+        };
+        img.onerror = resolve;
+        img.src = src;
+      })));
+    }
+    function iconRichStyles(size) {
+      const rich = {};
+      Object.values(MODEL_ICONS).forEach(src => {
+        const key = 'i' + src.replace(/\W/g, '');
+        rich[key] = { backgroundColor: { image: BADGES[src] || src }, width: size, height: size };
+      });
+      return rich;
+    }
+    const iconToken = m => MODEL_ICONS[m.name]
+      ? `{i${MODEL_ICONS[m.name].replace(/\W/g, '')}|}` : '';
+
+    // Distinct muted colors for the radar, where all models must be tellable
+    // apart (same palette as the model-card figure).
+    const RADAR_COLORS = {
+      'SpatialAxiom-35B-A3B': '#8B72D6',
+      'SpatialAxiom-9B': '#B49CE8',
+      'Gemini-3.5-Flash': '#3E9BD6',
+      'Qwen3.7-Plus': '#5B8DEF',
+      'Gemini-3.1-Pro': '#4CB3A4',
+      'SenseNova-SI-1.5-InternVL3-8B': '#E8A13D',
+      'Kimi-K2.6': '#64748B',
+      'GPT-5.5': '#D4708F',
+    };
+    const RADAR_LEGEND_NAMES = {
+      'SenseNova-SI-1.5-InternVL3-8B': 'SenseNova-SI-1.5',
+    };
+
+    // Compact names under the per-benchmark bars (rotated to avoid overlap).
+    const MODEL_SHORT_NAMES = {
+      'SpatialAxiom-35B-A3B': 'SpatialAxiom-35B-A3B',
+      'SpatialAxiom-9B': 'SpatialAxiom-9B',
+      'Gemini-3.5-Flash': 'Gemini-3.5-Flash',
+      'Qwen3.7-Plus': 'Qwen3.7-Plus',
+      'Gemini-3.1-Pro': 'Gemini-3.1-Pro',
+      'SenseNova-SI-1.5-InternVL3-8B': 'SenseNova-SI-1.5',
+      'Kimi-K2.6': 'Kimi-K2.6',
+      'GPT-5.5': 'GPT-5.5',
+    };
+    const BENCH_SUBTITLES = {
+      'VSI-Bench': 'Indoor & outdoor spatial reasoning',
+      'MMSI-Bench': 'Multi-image spatial intelligence',
+      'MindCube': 'Spatial cognition & mental rotation',
+      'ViewSpatial': 'Multi-view spatial understanding',
+      'SITE': 'Multi-task spatial estimation',
+      'BLINK': 'Multimodal visual perception',
+      '3DSR': '3D spatial reasoning',
+      'EmbSpatial': 'Embodied spatial understanding',
+    };
+    // Same headroom logic as y_limit() in build_benchmark_figure.py.
+    function axisCap(values) {
+      const top = Math.max(...values);
+      const padded = top + Math.max(6, top * 0.08);
+      for (const cap of [55, 60, 70, 75, 85, 90, 100]) if (padded <= cap) return cap;
+      return Math.ceil(padded / 10) * 10;
+    }
+
+    // Display renames: leaderboard data still uses internal TQ-Spatial names.
+    const RENAME = {
+      'TQ-Spatial-9B': 'SpatialAxiom-9B',
+      'TQ-Spatial-35B-A3B': 'SpatialAxiom-35B-A3B',
+      'TQ-Spatial-8B': 'SpatialAxiom-8B',
+    };
+    function applyRenames(data) {
+      const fix = m => { if (RENAME[m.name]) m.name = RENAME[m.name]; };
+      (data.models || []).forEach(fix);
+      (data.chart_models || []).forEach(fix);
+      return data;
+    }
+
+    // ---- Load data (window.LEADERBOARD from leaderboard.js; fetch fallback) ----
+    async function loadData() {
+      if (window.LEADERBOARD) return applyRenames(window.LEADERBOARD);
+      const res = await fetch('leaderboard.json');
+      return applyRenames(await res.json());
+    }
+
+    function shortLabel(data, b) { return (data.short_labels && data.short_labels[b]) || b; }
+    function chartModels(data) { return (data.chart_models && data.chart_models.length) ? data.chart_models : data.models; }
+
+    function renderAvgChart(data) {
+      const el = document.getElementById('chart-avg');
+      const chart = echarts.init(el, null, { renderer: 'canvas' });
+      const rows = chartModels(data).filter(m => m.average != null)
+        .slice().sort((a, b) => a.average - b.average); // asc so #1 ends on top
+      const xmax = axisCap(rows.map(m => m.average));
+      const isOurs = rows.map(m => m.is_ours);
+      chart.setOption({
+        grid: { left: 8, right: 56, top: 10, bottom: 10, containLabel: true },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+          backgroundColor: '#ffffff', borderColor: C.grid, textStyle: { color: '#101828' },
+          // Two bar series overlap (bar + label overlay); report the score once.
+          formatter: params => {
+            const p = params[0];
+            const v = typeof p.value === 'object' ? p.value.value : p.value;
+            return `${p.name}<br/>${t('chart.avg.title')}: <b>${(+v).toFixed(1)}</b>`;
+          } },
+        xAxis: { type: 'value', max: xmax,
+          axisLine: { show: true, lineStyle: { color: C.spine } },
+          splitLine: { show: false },
+          axisLabel: { color: C.muted } },
+        yAxis: { type: 'category', data: rows.map(m => m.name),
+          axisLine: { show: false }, axisTick: { show: false },
+          axisLabel: { color: C.text, lineHeight: 14,
+            formatter: (v, i) => {
+              const name = v === 'SenseNova-SI-1.5-InternVL3-8B'
+                ? 'SenseNova-SI-1.5\nInternVL3-8B'
+                : (v.length > 22 ? v.slice(0, 21) + '…' : v);
+              return isOurs[i] ? `{ours|${name}}` : name;
+            },
+            rich: { ours: { fontWeight: 'bold', color: C.text } } } },
+        series: [
+          {
+            type: 'bar', barWidth: '62%',
+            showBackground: true,
+            backgroundStyle: { color: C.track, borderRadius: 999 },
+            data: rows.map(m => ({ value: m.average,
+              itemStyle: { color: hGradient(m), borderRadius: [0, 6, 6, 0] } })),
+            label: { show: true, position: 'insideRight', distance: 6,
+              formatter: p => iconToken(rows[p.dataIndex]),
+              rich: iconRichStyles(16) },
+          },
+          { // transparent overlay carrying the score labels outside the bars
+            type: 'bar', barWidth: '62%', barGap: '-100%', silent: true,
+            itemStyle: { color: 'rgba(0,0,0,0)' },
+            data: rows.map(m => m.average),
+            label: { show: true, position: 'right', color: C.text, fontSize: 12,
+              formatter: p => isOurs[p.dataIndex]
+                ? `{b|${p.value.toFixed(1)}}` : p.value.toFixed(1),
+              rich: { b: { fontWeight: 'bold', color: C.text, fontSize: 12 } } },
+          },
+        ],
+      });
+      return chart;
+    }
+
+    // Per-benchmark radar next to the average ranking, as in the model-card
+    // figure: scores are min-max scaled over all models/benchmarks so nearby
+    // lines separate; ours keeps the violet accent and a soft fill.
+    function renderRadarChart(data) {
+      const el = document.getElementById('chart-radar');
+      const chart = echarts.init(el);
+      const models = chartModels(data).filter(m => m.average != null)
+        .slice().sort((a, b) => b.average - a.average);
+      const benches = data.benchmarks;
+      const all = models.flatMap(m => benches.map(b => m.scores[b]).filter(v => v != null));
+      const lo = Math.min(...all), hi = Math.max(...all);
+      const padIn = 0.12;
+      const norm = v => padIn + (hi === lo ? 0.5 : (v - lo) / (hi - lo)) * (1 - padIn);
+      const legendName = m => RADAR_LEGEND_NAMES[m.name] || m.name;
+      // Competitors first so ours is drawn on top.
+      const items = models.slice()
+        .sort((a, b) => (a.is_ours ? 1 : 0) - (b.is_ours ? 1 : 0))
+        .map(m => {
+          const color = RADAR_COLORS[m.name] || '#94A3B8';
+          return {
+            name: legendName(m),
+            value: benches.map(b => m.scores[b] != null ? norm(m.scores[b]) : 0),
+            symbol: 'none',
+            lineStyle: { width: m.is_ours ? 2.4 : 1.3, color },
+            itemStyle: { color },
+            areaStyle: m.is_ours ? { color, opacity: 0.16 } : { opacity: 0 },
+          };
+        });
+      chart.setOption({
+        legend: { bottom: 0, left: 'center',
+          data: models.map(legendName),
+          itemWidth: 14, itemHeight: 8, itemGap: 8,
+          textStyle: { color: C.text, fontSize: 10 } },
+        radar: {
+          indicator: benches.map(b => ({ name: shortLabel(data, b), max: 1 })),
+          radius: '62%', center: ['50%', '42%'],
+          axisName: { color: C.text, fontSize: 9.5 },
+          axisLine: { lineStyle: { color: C.grid } },
+          splitLine: { lineStyle: { color: C.grid } },
+          splitArea: { show: false },
+        },
+        series: [{ type: 'radar', data: items }],
+      });
+      return chart;
+    }
+
+    // One small vertical grouped-bar chart per benchmark (4 per row, 2 rows),
+    // styled after the model-card figure: title + subtitle, logo inside the bar
+    // top, score above the bar, compact model names below the axis.
+    function renderBenchGrid(data) {
+      const grid = document.getElementById('bench-grid');
+      grid.innerHTML = '';
+      const charts = [];
+      data.benchmarks.forEach(b => {
+        const label = shortLabel(data, b);
+        const cell = document.createElement('div');
+        cell.className = 'rounded-xl border border-white/10 bg-white/[0.02] p-3';
+        const title = document.createElement('div');
+        title.className = 'text-sm font-semibold text-white';
+        title.textContent = label;
+        const subtitle = document.createElement('div');
+        subtitle.className = 'text-[11px] text-slate-400 mb-1';
+        subtitle.textContent = BENCH_SUBTITLES[label] || '';
+        const chartDiv = document.createElement('div');
+        chartDiv.className = 'w-full';
+        chartDiv.style.height = '215px';
+        cell.appendChild(title);
+        cell.appendChild(subtitle);
+        cell.appendChild(chartDiv);
+        grid.appendChild(cell);
+
+        const chart = echarts.init(chartDiv);
+        const rows = chartModels(data).filter(m => m.scores[b] != null);
+        const ymax = axisCap(rows.map(m => m.scores[b]));
+        chart.setOption({
+          grid: { left: 2, right: 36, top: 18, bottom: 2, containLabel: true },
+          tooltip: { trigger: 'item', backgroundColor: '#ffffff', borderColor: C.grid,
+            textStyle: { color: '#101828' },
+            formatter: p => `${rows[p.dataIndex].name}<br/>${label}: <b>${(+p.value).toFixed(1)}</b>` },
+          xAxis: { type: 'category', data: rows.map(m => m.name),
+            axisLine: { lineStyle: { color: C.spine } }, axisTick: { show: false },
+            axisLabel: { interval: 0, fontSize: 7.5, rotate: -38, margin: 5, color: C.text,
+              formatter: (v, i) => {
+                const name = MODEL_SHORT_NAMES[v] || v;
+                return rows[i].is_ours ? `{ours|${name}}` : name;
+              },
+              rich: { ours: { fontWeight: 'bold', color: C.text, fontSize: 7.5 } } } },
+          yAxis: { type: 'value', max: ymax, interval: ymax / 2,
+            axisLine: { show: true, lineStyle: { color: C.spine } },
+            axisLabel: { color: C.muted, fontSize: 9 },
+            splitLine: { lineStyle: { color: C.grid } } },
+          series: [
+            {
+              type: 'bar', barWidth: '72%',
+              data: rows.map(m => ({ value: m.scores[b],
+                itemStyle: { color: vGradient(m), borderRadius: [4, 4, 0, 0] } })),
+              label: { show: true, position: 'insideTop', distance: 4,
+                formatter: p => iconToken(rows[p.dataIndex]),
+                rich: iconRichStyles(11) },
+            },
+            { // transparent overlay carrying the score labels above the bars
+              type: 'bar', barWidth: '72%', barGap: '-100%', silent: true,
+              itemStyle: { color: 'rgba(0,0,0,0)' },
+              data: rows.map(m => m.scores[b]),
+              label: { show: true, position: 'top', distance: 2, color: C.text, fontSize: 8.5,
+                formatter: p => rows[p.dataIndex].is_ours
+                  ? `{b|${(+p.value).toFixed(1)}}` : (+p.value).toFixed(1),
+                rich: { b: { fontWeight: 'bold', color: C.text, fontSize: 8.5 } } },
+            },
+          ],
+        });
+        charts.push(chart);
+      });
+      return charts;
+    }
+
+    function renderTable(data) {
+      const benches = data.benchmarks;
+      const table = document.getElementById('rank-table');
+      const head = document.getElementById('rank-head');
+      const body = document.getElementById('rank-body');
+      const cols = [
+        { key: 'rank', label: '#', align: 'left' },
+        { key: 'name', label: t('table.col_model'), align: 'left' },
+        { key: 'average', label: t('table.col_avg'), align: 'center' },
+        ...benches.map(b => ({ key: b, label: shortLabel(data, b), align: 'center' })),
+      ];
+
+      head.innerHTML = '<tr>' + cols.map((c, idx) =>
+        `<th data-key="${c.key}" data-col-index="${idx}" class="sticky top-0 bg-panel/90 backdrop-blur px-3 py-2 text-${c.align} text-slate-400 font-medium cursor-pointer select-none border-b border-white/10 whitespace-nowrap">${c.label}<span class="sort-ind"></span></th>`
+      ).join('') + '</tr>';
+
+      const valOf = (m, key) =>
+        key === 'rank' ? (m.rank ?? 999) :
+        key === 'name' ? m.name :
+        key === 'average' ? (m.average ?? -1) :
+        (m.scores[key] ?? -1);
+
+      let sortKey = 'rank', asc = true;
+      function draw() {
+        const rows = data.models.slice().sort((a, b) => {
+          const va = valOf(a, sortKey), vb = valOf(b, sortKey);
+          if (typeof va === 'string') return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+          return asc ? va - vb : vb - va;
+        });
+        body.innerHTML = rows.map(m => {
+          const hl = m.is_ours ? 'rank-row-ours' : '';
+          const tag = m.is_ours
+            ? '<span class="ml-2 align-middle text-[10px] rounded px-1.5 py-0.5 bg-accent text-white">' + t('badge.ours') + '</span>'
+            : '';
+          const cells = cols.map((c, idx) => {
+            if (c.key === 'rank')
+              return `<td data-col-index="${idx}" class="px-3 py-2 text-slate-400">${m.rank ?? '-'}</td>`;
+            if (c.key === 'name')
+              return `<td data-col-index="${idx}" class="px-3 py-2 font-medium ${m.is_ours ? 'text-white' : 'text-slate-200'} whitespace-nowrap">${m.name}${tag}</td>`;
+            const v = c.key === 'average' ? m.average : m.scores[c.key];
+            const isBest = (c.key === 'average')
+              ? m.rank === 1
+              : (m.ranks && m.ranks[c.key] === 1);
+            const cls = isBest ? 'text-white font-bold' : 'text-slate-300';
+            return `<td data-col-index="${idx}" class="px-3 py-2 text-center ${cls}">${v == null ? '<span class="text-slate-600">–</span>' : v.toFixed(1)}</td>`;
+          }).join('');
+          return `<tr class="${hl} border-b border-white/5">${cells}</tr>`;
+        }).join('');
+        head.querySelectorAll('.sort-ind').forEach(s => s.textContent = '');
+        const th = head.querySelector(`th[data-key="${sortKey}"] .sort-ind`);
+        if (th) th.textContent = asc ? ' ▲' : ' ▼';
+      }
+      const clearTableHover = () =>
+        table.querySelectorAll('.rank-col-hover, .rank-row-hover')
+          .forEach(cell => cell.classList.remove('rank-col-hover', 'rank-row-hover'));
+      if (!table.dataset.columnHoverBound) {
+        table.addEventListener('mouseover', e => {
+          const cell = e.target.closest('th, td');
+          if (!cell || !table.contains(cell) || cell.dataset.colIndex == null) return;
+          clearTableHover();
+          if (cell.tagName === 'TD') {
+            cell.parentElement.querySelectorAll('td')
+              .forEach(rowCell => rowCell.classList.add('rank-row-hover'));
+          }
+          table.querySelectorAll(`[data-col-index="${cell.dataset.colIndex}"]`)
+            .forEach(colCell => colCell.classList.add('rank-col-hover'));
+        });
+        table.addEventListener('mouseleave', clearTableHover);
+        table.dataset.columnHoverBound = 'true';
+      }
+      head.querySelectorAll('th').forEach(th => th.addEventListener('click', () => {
+        const k = th.dataset.key;
+        if (k === sortKey) asc = !asc;
+        else { sortKey = k; asc = (k === 'rank' || k === 'name'); }
+        draw();
+      }));
+      draw();
+    }
+
+    let DATA = null;
+
+    function setLang(lang) {
+      LANG = lang;
+      localStorage.setItem('tq_lang', lang);
+      applyI18n();
+      if (DATA) renderTable(DATA);
+    }
+
+    (async function init() {
+      DATA = await loadData();
+      await buildIconBadges();
+
+      const avgChart = renderAvgChart(DATA);
+      const radarChart = renderRadarChart(DATA);
+      const benchCharts = renderBenchGrid(DATA);
+
+      applyLinks();
+      setLang(LANG); // applies i18n + renders the table in the active language
+
+      const lt = document.getElementById('lang-toggle');
+      if (lt) lt.addEventListener('click', () => setLang(LANG === 'zh' ? 'en' : 'zh'));
+
+      const copyBtn = document.getElementById('copy-cite');
+      if (copyBtn) {
+        let resetTimer = null;
+        copyBtn.addEventListener('click', async () => {
+          // innerText keeps the line breaks produced by the block-level
+          // author span (textContent would flatten them away).
+          const text = document.getElementById('bibtex-code').innerText;
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch {
+            // Fallback for non-secure contexts where the Clipboard API is unavailable.
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+          }
+          copyBtn.textContent = t('footer.copied');
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => { copyBtn.textContent = t('footer.copy'); }, 1600);
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        avgChart.resize();
+        radarChart.resize();
+        benchCharts.forEach(c => c.resize());
+      });
+    })();
+  </script>
+</body>
+</html>
