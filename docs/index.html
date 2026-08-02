@@ -161,11 +161,13 @@
           <h3 class="text-xl font-bold text-white">SpatialAxiom-9B</h3>
           <p class="mt-1 text-xs text-slate-400" data-i18n="model9.base">Built on Qwen3.5-9B &middot; compact dense model</p>
           <div class="mt-5 flex flex-wrap gap-2">
+            <!--
             <a href="#MS_9B_REPO_URL" data-link="ms9" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 bg-accent text-white text-sm font-medium hover:opacity-90">
               <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-ms"/></svg>
               ModelScope
             </a>
-            <a href="https://huggingface.co/yokinglou/SpatialAxiom-9B" data-link="hf9" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
+            -->
+            <a href="https://huggingface.co/SpatialAxiom/SpatialAxiom-9B" data-link="hf9" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
               <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-hf"/></svg>
               Hugging Face
             </a>
@@ -176,11 +178,13 @@
           <h3 class="text-xl font-bold text-white">SpatialAxiom-35B-A3B</h3>
           <p class="mt-1 text-xs text-slate-400" data-i18n="model35.base">Built on Qwen3.5-35B-A3B &middot; MoE with 3B active params</p>
           <div class="mt-5 flex flex-wrap gap-2">
+            <!--
             <a href="#MS_35B_REPO_URL" data-link="ms35" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 bg-accent text-white text-sm font-medium hover:opacity-90">
               <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-ms"/></svg>
               ModelScope
             </a>
-            <a href="https://huggingface.co/yokinglou/SpatialAxiom-35B-A3B" data-link="hf35" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
+            -->
+            <a href="https://huggingface.co/SpatialAxiom/SpatialAxiom-35B-A3B" data-link="hf35" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10">
               <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-hf"/></svg>
               Hugging Face
             </a>
@@ -303,11 +307,11 @@
   <script>
     // ---- Config: public links (edit before publishing) ----
     const LINKS = {
-      hf: 'https://huggingface.co/yokinglou/SpatialAxiom-9B',
-      hf9: 'https://huggingface.co/yokinglou/SpatialAxiom-9B',
-      hf35: 'https://huggingface.co/yokinglou/SpatialAxiom-35B-A3B',
-      ms9: '<MS_9B_REPO_URL>',
-      ms35: '<MS_35B_REPO_URL>',
+      hf: 'https://huggingface.co/SpatialAxiom/SpatialAxiom-9B',
+      hf9: 'https://huggingface.co/SpatialAxiom/SpatialAxiom-9B',
+      hf35: 'https://huggingface.co/SpatialAxiom/SpatialAxiom-35B-A3B',
+      // ms9: '<MS_9B_REPO_URL>',
+      // ms35: '<MS_35B_REPO_URL>',
     };
     function applyLinks() {
       document.querySelectorAll('[data-link]').forEach(a => {
