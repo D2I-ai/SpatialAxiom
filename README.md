@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://d2i-ai.github.io/SpatialAxiom"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Homepage-B49CE8" alt="Homepage"></a>
+  <a href="https://d2i-ai.github.io/SpatialAxiom"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Homepage-2050EB" alt="Homepage"></a>
   <a href="https://huggingface.co/SpatialAxiom/SpatialAxiom-9B"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20SpatialAxiom--9B-ffd21e" alt="SpatialAxiom-9B"></a>
   <a href="https://huggingface.co/SpatialAxiom/SpatialAxiom-35B-A3B"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20SpatialAxiom--35B--A3B-ffd21e" alt="SpatialAxiom-35B-A3B"></a>
 </p>
@@ -45,7 +45,7 @@ If you find our work helpful, please consider giving us a cite.
 ```bibtex
 @misc{spatialaxiom,
     title  = {SpatialAxiom: An Open Spatial Intelligence Model for General Spatial Reasoning},
-    author = {Lou, Yujing and Chen, Pingyi and Cao, Shen and Gu, Jiaqi and Guo, Jinhui and Tong, Jintao and Hao, Yunzhuo and Liu, Yao and Fan, Lubin† and Wu, Yue and Ye, Jieping},
+    author = {Lou, Yujing and Chen, Pingyi and Cao, Shen and Gu, Jiaqi and Guo, Jinhui and Tong, Jintao and Hao, Yunzhuo and Liu, Yao and Wu, Yue and Fan, Lubin and Ye, Jieping},
     month  = {July},
     year   = {2026},
     url    = {https://d2i-ai.github.io/SpatialAxiom}
