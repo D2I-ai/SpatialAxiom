@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400px" src="docs/assets/spatialaxiom_logo.png">
+  <img width="400px" src="docs/assets/spatialaxiom_brand_logo.png">
 </p>
 
 <p align="center">
