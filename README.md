@@ -45,7 +45,7 @@ If you find our work helpful, please consider giving us a cite.
 ```bibtex
 @misc{spatialaxiom,
     title  = {SpatialAxiom: An Open Spatial Intelligence Model for General Spatial Reasoning},
-    author = {Lou, Yujing and Chen, Pingyi and Cao, Shen and Gu, Jiaqi and Guo, Jinhui and Tong, Jintao and Hao, Yunzhuo and Liu, Yao and Fan, Lubin and Wu, Yue and Ye, Jieping},
+    author = {Lou, Yujing and Chen, Pingyi and Cao, Shen and Gu, Jiaqi and Guo, Jinhui and Tong, Jintao and Hao, Yunzhuo and Liu, Yao and Fan, Lubin† and Wu, Yue and Ye, Jieping},
     month  = {July},
     year   = {2026},
     url    = {https://d2i-ai.github.io/SpatialAxiom}
